@@ -1,0 +1,16 @@
+[package]
+name = "layout_id"
+version = "0.0.1"
+authors = ["Jonathan Nilsson <l.a.jonathan.nilsson@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/JoNil/layout_id"
+documentation = "https://jonil.github.io/layout_id/layout_id/index.html"
+description = "Layout id is a compiler plugin to generate a unique id for a type that changes if it's memory layout changes"
+readme = "README.md"
+
+exclude = [
+  ".gitignore",
+  ".travis.yml",
+]
+
+[dependencies]
