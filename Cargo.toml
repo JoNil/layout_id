@@ -1,6 +1,6 @@
 [package]
 name = "layout_id"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Jonathan Nilsson <l.a.jonathan.nilsson@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/JoNil/layout_id"
@@ -13,8 +13,14 @@ exclude = [
   ".travis.yml",
 ]
 
+[features]
+use_clippy = ["clippy"]
+
 [dependencies]
-clippy = "*"
 regex = "*"
 regex_macros = "*"
 twox-hash = "*"
+
+[dependencies.clippy]
+version = "*"
+optional = true
