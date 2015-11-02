@@ -2,7 +2,6 @@
 #![feature(plugin)]
 
 #![cfg_attr(feature = "use_clippy", plugin(clippy))]
-#![plugin(regex_macros)]
 
 #![cfg_attr(feature = "use_clippy",
    warn(cast_possible_truncation, cast_possible_wrap, cast_precision_loss, cast_sign_loss,
@@ -11,7 +10,7 @@
 extern crate regex;
 extern crate twox_hash;
 
-use regex::Captures;
+use regex::{Captures, Regex};
 use std::hash::{Hash, Hasher};
 use std::intrinsics;
 use twox_hash::XxHash;
@@ -30,8 +29,8 @@ pub fn layout_id<T>() -> u64 {
 
 fn get_type_name(name: &str) -> String {
 
-    let inner = regex!(r#"<(.*)>"#);
-    let last_name = regex!(r#"[::]?([^:]*)$"#);
+    let inner = Regex::new(r#"<(.*)>"#).unwrap();
+    let last_name = Regex::new(r#"[::]?([^:]*)$"#).unwrap();
 
     let replaced_children = inner.replace_all(&name, |caps: &Captures| {
         format!("<{}>", get_type_name(&caps.at(1).unwrap()))
