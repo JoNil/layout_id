@@ -8,12 +8,6 @@
 
 #![feature(core_intrinsics)]
 
-#![cfg_attr(feature = "use_clippy", plugin(clippy))]
-
-#![cfg_attr(feature = "use_clippy",
-   warn(cast_possible_truncation, cast_possible_wrap, cast_precision_loss, cast_sign_loss,
-        non_ascii_literal, shadow_same, string_add, string_add_assign, unicode_not_nfc))]
-
 extern crate regex;
 extern crate twox_hash;
 
