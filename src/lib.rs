@@ -9,21 +9,19 @@
 #![feature(core_intrinsics)]
 
 extern crate regex;
-extern crate twox_hash;
 
 use regex::{Captures, Regex};
-use std::hash::{Hash, Hasher};
+use std::hash::{Hash, Hasher, SipHasher};
 use std::intrinsics;
-use twox_hash::XxHash;
+use std::mem::{align_of, size_of};
 
 pub fn layout_id<T>() -> u64 {
 
-    let mut s = XxHash::with_seed(0);
+    let mut s = SipHasher::new();
     
     get_type_name(unsafe { intrinsics::type_name::<T>() }).hash(&mut s);
-    unsafe { intrinsics::min_align_of::<T>() }.hash(&mut s);
-    unsafe { intrinsics::pref_align_of::<T>() }.hash(&mut s);
-    unsafe { intrinsics::size_of::<T>() }.hash(&mut s);
+    align_of::<T>().hash(&mut s);
+    size_of::<T>().hash(&mut s);
 
     s.finish()
 }
